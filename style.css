@@ -1,0 +1,152 @@
+/* General Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f4f5fF;
+  
+}
+
+header {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 40px 0;
+  background-image: url('img/tt.png');
+  background-size:cover;
+  background-position:right;
+  color: rgb(3, 3, 3);
+}
+
+.hero-section h1 {
+  font-size: 3em;
+  animation: fadeIn 2s ease-in-out;
+  background: linear-gradient(to right, #3498db, #e74c3c, #2ecc71, #f39c12); 
+-webkit-text-fill-color: transparent; 
+-webkit-background-clip: text;
+
+}
+
+.hero-section p {
+  margin: 5px 0;
+  font-size: 20px;
+}
+
+/* Card Section */
+.cards-section {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card h3 {
+  margin: 15px 0;
+  font-size: 18px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.card .cta {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #00796b; /* Blue Button */
+  color: white;
+  text-decoration: none; /* Remove underline */
+  border-radius: 25px;
+  transition: transform 0.3s ease, background-color 0.3s;
+  font-size: 14px;
+}
+
+.card .cta:hover {
+  background-color: #0056b3; /* Darker Blue on Hover */
+  transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* About Section Styles */
+.about-section {
+    background-color: #f9f9f9; /* Light gray background for contrast */
+    padding: 40px 20px; /* Spacing around the section */
+    text-align: center; /* Center-align text */
+    border-top: 2px solid #ccc; /* Optional border to separate the section */
+}
+
+.about-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333; /* Darker text for visibility */
+    margin-bottom: 20px;
+}
+
+.about-section p {
+    font-size: 16px;
+    color: #555; /* Medium gray for readability */
+    line-height: 1.6; /* Better text spacing */
+    margin-bottom: 20px;
+}
+
+.about-section ul {
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+.about-section li {
+    font-size: 16px;
+    color: #444; /* Darker gray for text */
+    margin-bottom: 10px;
+}
+
+.about-section a {
+    color: #0066cc; /* Blue for links */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make links stand out */
+}
+
+.about-section a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}

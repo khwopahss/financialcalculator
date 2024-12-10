@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depreciation Calculator</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #22E4AC;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            background: #f9f9f9;
+        }
+
+        button {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #007bff);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+
+        th {
+            background-color: #f3f8ff;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .error {
+            color: red;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Depreciation Calculator</h1>
+
+        <label for="cost">Enter Initial Cost (in NPR):</label>
+        <input type="number" id="cost" placeholder="e.g., 100000">
+
+        <label for="yearPurchased">Purchased Year:</label>
+        <input type="number" id="yearPurchased" placeholder="e.g., 2020">
+
+        <label for="rate">Depreciation Rate (in %):</label>
+        <input type="number" id="rate" placeholder="e.g., 10">
+
+        <label for="years">Number of Years:</label>
+        <input type="number" id="years" placeholder="e.g., 5">
+
+        <button onclick="calculateDepreciation()">Calculate</button>
+
+        <div class="error" id="errorMessage"></div>
+
+        <table id="resultTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Acquisition Cost</th>
+                    <th>Depreciation Cost</th>
+                    <th>Depreciation Expenses</th>
+                    <th>Accumulated Depreciation</th>
+                    <th>Ending Book Value</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        function calculateDepreciation() {
+    const cost = parseFloat(document.getElementById('cost').value);
+    const rate = parseFloat(document.getElementById('rate').value) / 100;
+    const yearPurchased = parseInt(document.getElementById('yearPurchased').value);
+    const years = parseInt(document.getElementById('years').value);
+
+    // Validation
+    if (isNaN(cost) || isNaN(rate) || isNaN(yearPurchased) || isNaN(years) ||
+        cost <= 0 || rate <= 0 || yearPurchased <= 0 || years <= 0) {
+        document.getElementById('errorMessage').innerText = "Please enter valid values!";
+        document.getElementById('resultTable').style.display = 'none';
+        return;
+    }
+
+    let accumulatedDepreciation = 0;
+    let tableBody = '';
+    let stopDepreciation = false;
+
+    // Loop through each year to calculate depreciation
+    for (let year = 0; year < years; year++) {
+        const depreciationCost = cost * rate;
+        
+        // Check if accumulated depreciation exceeds the cost
+        if (cost - accumulatedDepreciation < depreciationCost) {
+            stopDepreciation = true;
+            break;  // Stop if the remaining book value is less than depreciation cost
+        }
+
+        accumulatedDepreciation += depreciationCost;
+        const endingBookValue = cost - accumulatedDepreciation;
+
+        // Append a new row for each year
+        tableBody += `
+            <tr>
+                <td>${yearPurchased + year}</td>
+                <td>${cost.toFixed(2)}</td>
+                <td>${depreciationCost.toFixed(2)}</td>
+                <td>${depreciationCost.toFixed(2)}</td>
+                <td>${accumulatedDepreciation.toFixed(2)}</td>
+                <td>${endingBookValue.toFixed(2)}</td>
+            </tr>
+        `;
+    }
+
+    // Check if depreciation stopped
+    if (stopDepreciation) {
+        document.getElementById('errorMessage').innerText = "Depreciation stopped because the remaining book value is less than the depreciation cost.";
+    } else {
+        document.getElementById('errorMessage').innerText = '';
+    }
+
+    // Show the table with the results
+    document.getElementById('resultTable').style.display = 'block';
+    document.getElementById('resultTable').getElementsByTagName('tbody')[0].innerHTML = tableBody;
+}
+
+    </script>
+
+</body>
+
+</html>

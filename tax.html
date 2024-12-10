@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <!--title for the main program-->
+    <!--styling for the html code-->
+    <style>
+        /* Designs body tag */
+
+body {
+    font-family: Arial, sans-serif;
+    /* Sets the font for the page */
+    display: flex;
+    /* Uses flexbox for layout */
+    justify-content: center;
+    /* Centers the content horizontally */
+
+    /* Adds padding on top */
+    min-height: 100vh;
+    /* Ensures the page takes up the full viewport height */
+    margin: 0;
+    /* Removes default margin */
+    background-color: #22E4AC;
+    /* Sets the background color of the page */
+    overflow-y: auto;
+    /* Allows vertical scrolling */
+}
+
+      
+      
+
+
+.container {
+    display: flex;
+    /* Uses flexbox for layout */
+    flex-direction: row;
+    /* Aligns children elements in a row */
+    width: 100%;
+    /* Sets the width of the container */
+    padding: 30px;
+    
+    /* Adds padding inside the container */
+    background-color: #ffffff;
+    /* Sets the background color of the container */
+
+    border-radius: 5px;
+    /* Rounds the corners of the container */
+}
+
+.title {
+    text-align: center;
+    /* Centers the text */
+    width: 100%;
+    /* Makes the title span the full width of the container */
+    background: linear-gradient(to right, #f32170, 
+                    #ff6b08, #cf23cf, #eedd44); 
+            -webkit-text-fill-color: transparent; 
+            -webkit-background-clip: text; 
+    /* Sets the color of the title */
+    font-size: 3em;
+    /* Sets the font size of the title */
+    margin-bottom:2px;
+    /* Adds space below the title */
+}
+
+
+.left-column {
+    flex: 1;
+    /* Makes this column take up equal space */
+    margin-right: 50px;
+    /* Adds margin between columns */
+}
+.taxSlip {
+    flex: 0.5;
+    /* Makes this column take up equal space */
+    margin-right: 50px;
+    /* Adds margin between columns */
+}
+
+/*  Setting location for right column */
+
+.right-column {
+    flex: 1;
+    /* Makes this column take up equal space */
+    background-color: #fFFFFF;
+    /* Sets background color */
+    padding: 2px;
+    /* Adds padding inside the column */
+    border-radius: 10px;
+    /* Rounds the corners */
+   
+}
+
+
+/*  Defination for heading second tag */
+
+h2 {
+    text-align: center;
+    /* Centers the text */
+    color: #0079Fb;
+    /* Sets the color of the heading */
+    font-size: 1.5em;
+    /* Sets font size */
+    margin-bottom: 5px;
+    /* Adds space below the heading */
+}
+h1 {
+    text-align: left;
+    /* Centers the text */
+    color: #ee0606;
+    /* Sets the color of the heading */
+    font-size: 1.3em;
+    /* Sets font size */
+    margin-bottom: 4px;
+    /* Adds space below the heading */
+}
+
+/* Styles for the form group container */
+
+.form-group {
+    margin-bottom: 15px;
+    /* Adds bottom margin to the form group */
+}
+
+
+/* Styles for the label element inside the form group */
+
+.form-group label {
+    display: block;
+    /* Makes the label block-level so it occupies the full width */
+    margin-bottom: 8px;
+    /* Adds space between the label and the input field */
+    font-weight: bold;
+    /* Makes the label text bold */
+    color: #0079Fb;
+    /* Sets the label color to a shade of teal */
+}
+
+
+/* Styles for the input field inside the form group */
+
+.form-group input {
+    width: 100%;
+    height:100%;
+    /* Makes the input field take up the full width of its parent */
+    padding: 10px;
+    /* Adds padding inside the input field for better spacing */
+    border: 1px solid #b0bec5;
+    /* Sets a light grey border around the input */
+    border-radius: 5px;
+    /* Rounds the corners of the input field */
+    font-size: 1em;
+    /* Sets the font size of the input text */
+    
+}
+
+
+/* Styles for the radio button group */
+
+.radio-group {
+    display: flex;
+    /* Uses flexbox layout for radio buttons */
+    justify-content: space-between;
+    /* Distributes radio buttons evenly across the container */
+    margin-bottom: 25px;
+    /* Adds space below the radio group */
+}
+.radio-group label {
+    text-align: center; /* Centers the text under the radio button */
+    display: block; /* Makes the label a block-level element so it takes full width */
+}
+
+
+
+/* Styles for the button group container */
+
+.button-group {
+    display: flex;
+    /* Uses flexbox layout for buttons */
+    justify-content: space-between;
+    /* Distributes buttons evenly across the container */
+    gap: 10px;
+    /* Adds a gap between each button */
+}
+
+
+/* General button styles */
+
+/* Enhanced "Calculate" button styling */
+        button {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #007bff);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+/* Styles for the first button (Primary button) */
+
+button:first-child {
+    background-color: #0079Fb;
+    /* Sets the background color for the first button */
+}
+
+
+/* Styles for the second button (Secondary button) */
+
+button:last-child {
+    background-color: #b0bec5;
+    /* Sets the background color for the second button */
+}
+
+
+/* Styles for the result container */
+
+.result {
+    background-color: #ffffff;
+    /* Sets a white background color for the result container */
+    padding: 30px;
+    /* Adds padding inside the result container */
+    border-radius: 8px;
+    /* Rounds the corners of the result container */
+
+    margin-top: 30px;
+    /* Adds space above the result container */
+    width: 100%;
+    /* Sets the width of the result container to 80% of its parent */
+    max-width: 1000px;
+    /* Sets a maximum width for the result container */
+    margin-left: auto;
+    /* Centers the container horizontally */
+    margin-right: auto;
+    /* Centers the container horizontally */
+}
+
+
+/* Styles for the heading inside the result container */
+
+.result h2 {
+    font-size: 20px;
+    /* Sets the font size of the heading */
+    text-align: left;
+    /* Aligns the heading text to the left */
+    color: #4204d3;
+    /* Sets the color of the heading to teal */
+    margin-bottom: 10px;
+    /* Adds space below the heading */
+}
+
+
+/* Styles for the result table */
+
+.result-table {
+    width: 100%;
+    /* Makes the table take up the full width of its container */
+    border-collapse: collapse;
+    /* Ensures table borders are collapsed into a single border */
+    margin-top: 20px;
+    /* Adds space above the table */
+}
+
+
+/* Styles for the table headers and data cells */
+
+.result-table th,
+.result-table td {
+    padding: 6px 0px;
+    /* Adds padding inside the table cells */
+    text-align: left;
+    /* Aligns the text inside table cells to the left */
+    border: 1px solid #ddd;
+    /* Adds a light grey border around the table cells */
+}
+
+
+/* Styles for table headers */
+
+.result-table th {
+    background-color: #0079Fb;
+    /* Sets the background color for the header cells */
+    color: #ffffff;
+    /* Sets the text color of the header cells to white */
+    font-weight: bold;
+    /* Makes the header text bold */
+}
+
+
+/* Styles for the table data cells */
+
+.result-table td {
+    background-color: #f9f9f9;
+    /* Sets a light grey background for data cells */
+}
+
+
+/* Styles for even-numbered rows (zebra stripes effect) */
+
+.result-table tr:nth-child(even) td {
+    background-color: #f1f1f1;
+    /* Sets a slightly darker grey background for even rows */
+}
+
+
+/* Styles for rows on hover */
+
+.result-table tr:hover {
+    background-color: #e0f7fa;
+    /* Changes the background color of rows when hovered */
+}
+
+
+/* Styles for table data cells */
+
+.result-table td {
+    font-size: 1em;
+    /* Sets the font size of the table cell content */
+    color: #004d40;
+    /* Sets the text color for table cells */
+}
+
+
+/* Styles for the first data cell in each row (usually a label or identifier) */
+
+.result-table td:first-child {
+    font-weight: bold;
+    /* Makes the text in the first column bold */
+    color: #0079Fb;
+    /* Sets the text color of the first column to teal */
+}
+
+
+/* Styles for the last data cell in each row */
+
+.result-table td:last-child {
+    color: #004d40;
+    /* Sets the text color of the last column to a darker shade of teal */
+}
+    </style>
+
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="title-container">
+            <div class="container">
+                <h1 class="title">Tax Calculator</h1>
+            </div>
+        </div>
+        
+    
+    <div class="container">
+
+        <!-- Container that holds both left and right columns -->
+        <!-- Left Column for Inputs -->
+        <div class="left-column">
+            <!-- Left column containing the input form elements -->
+
+            <!-- Monthly Income Input -->
+            <div class="form-group">
+                <!-- Form group to hold label and input for monthly income -->
+                <label for="monthlyIncome">Monthly Income (Rs.):</label>
+                <!-- Label for monthly income input -->
+                <input type="number" id="monthlyIncome" placeholder="Enter your monthly income" required>
+                <!-- Input field for monthly income -->
+            </div>
+
+            <!-- Dearness Allowance Input -->
+            <div class="form-group">
+                <!-- Form group to hold label and input for dearness allowance -->
+                <label for="dearnessAllowance">Dearness Allowance (Monthly) (Rs.):</label>
+                <!-- Label for dearness allowance input -->
+                <input type="number" id="dearnessAllowance" placeholder="Enter dearness allowance" required>
+                <!-- Input field for dearness allowance -->
+            </div>
+
+            <!-- Festival Allowance Input -->
+            <div class="form-group">
+                <!-- Form group to hold label and input for festival allowance -->
+                <label for="festivalAllowance">Festival Allowance (Yearly) (Rs.):</label>
+                <!-- Label for festival allowance input -->
+                <input type="number" id="festivalAllowance" placeholder="Enter festival allowance" required>
+                <!-- Input field for festival allowance -->
+            </div>
+
+            <!-- Clothing Allowance Input -->
+            <div class="form-group">
+                <!-- Form group to hold label and input for clothing allowance -->
+                <label for="clothingAllowance">Clothing Allowance (Yearly) (Rs.):</label>
+                <!-- Label for clothing allowance input -->
+                <input type="number" id="clothingAllowance" placeholder="Enter clothing allowance" required>
+                <!-- Input field for clothing allowance -->
+            </div>
+
+            <!-- Life Insurance Premium Input -->
+            <div class="form-group">
+                <!-- Form group to hold label and input for life insurance -->
+                <label for="insurance">Life Insurance Premium (Rs.):</label>
+                <!-- Label for life insurance premium input -->
+                <input type="number" id="insurance" placeholder="Enter insurance premium" required>
+                <!-- Input field for life insurance premium -->
+            </div>
+
+            <!-- Donation Input -->
+            <div class="form-group">
+                <!-- Form group to hold label and input for donation -->
+                <label for="Donation">Donations (Yearly) (Rs.):</label>
+                <!-- Label for donation input -->
+                <input type="number" id="donation" placeholder="Enter donation amount" required>
+                <!-- Input field for Donation -->
+            </div>
+
+            <!-- EPF Percentage Input -->
+            <div class="form-group">
+                <!-- Form group to hold label and input for EPF percentage -->
+                <label for="epf">Employees' Provident Fund (EPF) Percentage (%):</label>
+                <!-- Label for EPF percentage input -->
+                <input type="number" id="epf" placeholder="Enter EPF percentage" required>
+                <!-- Input field for EPF percentage -->
+            </div>
+
+            <!-- CIT Input -->
+            <div class="form-group">
+                <!-- Form group to hold label and input for CIT -->
+                <label for="cit">Citizen Investment Trust (CIT) (Monthly) (Rs.):</label>
+                <!-- Label for CIT input -->
+                <input type="number" id="cit" placeholder="Enter CIT amount" required>
+                <!-- Input field for CIT -->
+            </div>
+
+            <!-- Filing Status Radio Buttons -->
+            <div class="form-group">
+                <!-- Form group for filing status selection -->
+                <label>Filing Status:</label>
+                <!-- Label for filing status options -->
+                <div class="radio-group">
+                    <!-- Container for radio buttons for filing status -->
+                    <label>
+              <input type="radio" name="filingStatus" value="single" checked>Single <!-- Radio button for single status -->
+            </label>
+                    <label>
+              <input type="radio" name="filingStatus" value="married">Married <!-- Radio button for married status -->
+            </label>
+                </div>
+            </div>
+
+            <!-- Button Group -->
+            <div class="button-group">
+                <!-- Container for the buttons -->
+                <button type="button" onclick="calculateTax()">Calculate Tax</button>
+                <!-- Button to trigger tax calculation -->
+                <button type="button" onclick="resetFields()">Reset</button>
+                <!-- Button to reset the input fields -->
+            </div>
+        </div>
+
+        <!-- Right Column for Output -->
+        <div class="right-column">
+            <!-- Right column where the results will be displayed -->
+            <div class="result" id="result"></div>
+            <!-- Element to display the result of the tax calculation -->
+        </div>
+
+        <!-- Detailed Tax Slip -->
+        <div class= taxSlip id="taxSlip"></div>
+        <!-- Preformatted text area to display detailed tax slip -->
+    </div>
+    <!--closing the container of columns-->
+    <script>
+        function calculateTax() { // Function to calculate tax based on user inputs
+    const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value) || 0; // Get monthly income from input field, default to 0 if invalid
+    const dearnessAllowance = parseFloat(document.getElementById('dearnessAllowance').value) || 0; // Get dearness allowance from input field, default to 0 if invalid
+    const festivalAllowance = parseFloat(document.getElementById('festivalAllowance').value) || 0; // Get festival allowance from input field, default to 0 if invalid
+    const clothingAllowance = parseFloat(document.getElementById('clothingAllowance').value) || 0; // Get clothing allowance from input field, default to 0 if invalid
+    const insurance = Math.min(parseFloat(document.getElementById('insurance').value) || 0, 40000); // Get insurance premium, limit to a maximum of 40,000
+    const citInput = parseFloat(document.getElementById('cit').value) || 0; // Get CIT amount from input field, default to 0 if invalid
+    const filingStatus = document.querySelector('input[name="filingStatus"]:checked').value; // Get selected filing status (single or married)
+    const epfPercentage = parseFloat(document.getElementById('epf').value) || 0; // Get EPF percentage from input field, default to 0 if invalid
+    const basicYearlyIncome = monthlyIncome * 12; //Calculate yearly basic income
+    const donate = parseFloat(document.getElementById('donation').value) || 0; //Get Donation amount from input field, default to 0 if invalid
+    const annualIncome = (monthlyIncome + dearnessAllowance) * 12 + festivalAllowance + clothingAllowance ; // Calculate total annual income from monthly income and allowances
+    const citAmount = citInput*12
+    const epfAmount = (basicYearlyIncome * epfPercentage ) / 100; // Calculate EPF deduction based on percentage
+    let sumEpfCit = 0; // Define sumEpfCit variable
+    const conditionEPF = Math.min(1/3*annualIncome, 300000);
+    if (epfAmount+citAmount >= conditionEPF ){
+      sumEpfCit = (epfAmount + citAmount)  - conditionEPF;
+    } else{ 
+      sumEpfCit = epfAmount + citAmount;
+    }
+    var totalDeductions = insurance + sumEpfCit + donate; // Calculate total deductions (EPF, insurance, and CIT)
+    const finalTaxableIncome = annualIncome - totalDeductions; // Calculate final taxable income after deductions
+    let tax = 0; // Variable to store the total tax
+    let taxBreakdown = ""; // Variable to store the breakdown of the tax calculation
+    // Define tax brackets based on filing status
+    const brackets = filingStatus === "married" ? [ // Set tax brackets for married individuals
+        { limit: 600000, rate: 0.01 }, // Tax rate 1% for income up to 600,000
+        { limit: 800000, rate: 0.10 }, // Tax rate 10% for income up to 800,000
+        { limit: 1100000, rate: 0.20 }, // Tax rate 20% for income up to 1,100,000
+        { limit: 2000000, rate: 0.30 }, // Tax rate 30% for income up to 2,000,000
+        { limit: 5000000, rate: 0.36 }, // Tax rate 36% for income up to 5,000,000
+        { rate: 0.39 } // Tax rate 39% for income over 5,000,000
+    ] : [ // Set tax brackets for single individuals
+        { limit: 500000, rate: 0.01 }, // Tax rate 1% for income up to 500,000
+        { limit: 700000, rate: 0.10 }, // Tax rate 10% for income up to 700,000
+        { limit: 1000000, rate: 0.20 }, // Tax rate 20% for income up to 1,000,000
+        { limit: 2000000, rate: 0.30 }, // Tax rate 30% for income up to 2,000,000
+        { limit: 5000000, rate: 0.36 }, // Tax rate 36% for income up to 5,000,000
+        { rate: 0.39 } // Tax rate 39% for income over 5,000,000
+    ];
+    // Calculate tax based on the tax brackets
+    let previousLimit = 0; // Variable to store the previous limit of the bracket
+    for (let i = 0; i < brackets.length; i++) { // Loop through the tax brackets
+        const { limit, rate } = brackets[i]; // Destructure limit and rate for each bracket
+        if (finalTaxableIncome > previousLimit) { // If the final taxable income exceeds the previous limit
+            const taxableAmount = limit ? Math.min(finalTaxableIncome, limit) - previousLimit : finalTaxableIncome - previousLimit; // Calculate the taxable amount within the current bracket
+            const taxForBracket = taxableAmount * rate; // Calculate tax for this bracket
+            tax += taxForBracket; // Add tax for this bracket to total tax
+            taxBreakdown += `<tr><td>${(rate * 100).toFixed(0)}%</td><td>Rs.${previousLimit + 1} to Rs.${limit}</td><td>Rs.${taxForBracket.toFixed(2)}</td></tr>`; // Add tax breakdown for this bracket to the table
+            previousLimit = limit; // Update the previous limit to the current bracket's limit
+        } else {
+            break; // Break the loop if taxable income does not exceed the current bracket
+        }
+    }
+    // Constructing the output table
+    let output = `
+    <table class="result-table"> 
+      <thead class="result-table">
+        <tr>
+           <h2>Calculating Taxable income</h2>
+          <th class="result-table">Particulars</th>
+          <th class="result-table">Amount</th>
+        </tr>
+      </thead>
+      <tbody class="result-table">
+        <tr><td>Monthly Basic Salary</td><td>Rs ${monthlyIncome.toFixed(2)}</td></tr>
+        <tr><td>Your Annual Basic Salary</td><td>Rs ${(monthlyIncome * 12).toFixed(2)}</td></tr>
+        <tr><td>Annual Dearness Allowance</td><td>Rs ${(dearnessAllowance * 12).toFixed(2)}</td></tr>
+        <tr><td>Annual Festival Allowance</td><td>Rs ${festivalAllowance.toFixed(2)}</td></tr>
+        <tr><td>Annual Clothing Allowance</td><td>Rs ${clothingAllowance.toFixed(2)}</td></tr>
+        <tr><td><h1>Total Assessable Income</h1></td><td><h1>Rs ${annualIncome.toFixed(2)}</h1></td></tr>
+      </tbody>
+      </table>
+      <br><br>
+      <table>
+      <tbody class="result-table">
+        <h2>Calculating Tax Deduction</h2>
+        <th class="result-table">Particulars</th>
+        <th class="result-table">Amount</th>
+        <tr><td>Citizen Investment Trust Deduction (Yearly)</td><td>Rs ${citAmount.toFixed(2)}</td></tr>
+        <tr><td>Employees' Provident Fund (Yearly)</td><td>Rs ${epfAmount.toFixed(2)}</td></tr>
+        <tr><td>Life Insurance Premium (Yearly)</td><td>Rs ${insurance.toFixed(2)}</td></tr>
+        <tr><td>Donations (Yearly)</td><td>Rs ${donate.toFixed(2)}</td></tr>
+        <tr><td>Total Tax Free Amount</td><td>Rs ${totalDeductions.toFixed(2)}</td></tr>
+        <tr><td><h1>Final Taxable Income</h1></td><td><h1>Rs ${finalTaxableIncome.toFixed(2)}</h1></td></tr>
+      </tbody>
+    </table>
+    <br>
+    <h2>Tax Calculation Breakdown:</h2>
+    <table style="width: 100%(; border-collapse: collapse;">
+      <thead class="result-table">
+        <tr>
+          <th>Tax Rate</th>
+          <th>Taxable Income</th>
+          <th>Tax</th>
+        </tr>
+      </thead>
+      <tbody class="result-table">
+        ${taxBreakdown}
+      </tbody>
+    </table>
+    <h1>Total Tax Paying Amount: Rs ${tax.toFixed(2)}</h1>
+  `;
+    // Display the table output
+    document.getElementById('result').innerHTML = output; // Set the HTML content of the result div to the output table
+}
+
+function resetFields() {
+    document.getElementById('monthlyIncome').value = ''; //Reset Monthly income Field
+    document.getElementById('dearnessAllowance').value = ''; //Reset Dearness Allowance Field
+    document.getElementById('festivalAllowance').value = ''; //Reset Festival Allowance Field
+    document.getElementById('clothingAllowance').value = ''; //Reset CLothing Allowance Field
+    document.getElementById('donation').value = ''; //Reset Donation Field
+    document.getElementById('insurance').value = ''; //Reset Life insurance Field
+    document.getElementById('epf').value = ''; //Reset Employees' Provident Fund (EPF) Field
+    document.getElementById('cit').value = ''; //Reset Citizen Investment Trust (CIT) Field
+    document.querySelector('input[name="filingStatus"][value="single"]').checked = true; //Reset Relationship Status Field
+    document.getElementById('result').innerHTML = ''; //Reset Result Field
+}
+    </script>
+</body>
+
+</html>

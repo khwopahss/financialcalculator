@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator</title>
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: #22E4AC;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        max-width: 400px;
+        width: 100%;
+        padding: 20px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        color: #555;
+        font-weight: bold;
+      }
+
+      input {
+        width: 100%;
+        max-width: 300px;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #333;
+        background: #f9f9f9;
+        box-sizing: border-box;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Enhanced "Calculate" button styling */
+        button {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #007bff);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+      .result {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .result h2 {
+        color: #333;
+      }
+
+      #result {
+        font-weight: bold;
+        color: #ff5722;
+      }
+ #amount {
+        font-weight: bold;
+        color: #ff5722;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compound Interest Calculator</h1>
+        <form id="calculator-form">
+            <label for="principal">Principal Amount (P):</label>
+            <input type="number" id="principal" required placeholder="Enter Pricipal amount (Rs.)">
+
+            <label for="rate">Annual Interest Rate (%):</label>
+            <input type="number" id="rate" required placeholder="Enter Rate of interest">
+
+            <label for="years">Time (Years):</label>
+            <input type="number" id="years" placeholder="Enter time in years">
+
+            <label for="months">Time (Months):</label>
+            <input type="number" id="months" placeholder="Enter time in months">
+
+            <label for="compound">Compounding Frequency:</label>
+            <select id="compound" required>
+                <option value="1">Annually</option>
+                <option value="2">Semi-Annually</option>
+                <option value="4">Quarterly</option>
+            </select>
+
+            <br><button type="submit">Calculate</button>
+        </form>
+
+        <div class="result">
+            <h2>Compound Interest: <span id="result"></span></h2>
+			<h2>Compounded Amount: <span id="amount"></span></h2>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calculator-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get input values
+            const principal = parseFloat(document.getElementById('principal').value) || 0;
+            const rate = parseFloat(document.getElementById('rate').value) || 0;
+            const years = parseFloat(document.getElementById('years').value) || 0;
+            const months = parseFloat(document.getElementById('months').value) || 0;
+            const compoundFrequency = parseInt(document.getElementById('compound').value);
+
+            // Total time in years
+            const timeInYears = years + (months / 12);
+
+            // Compound Interest formula
+            const amount = principal * Math.pow((1 + (rate / 100) / compoundFrequency), compoundFrequency * timeInYears);
+            const compoundInterest = amount - principal;
+
+            // Display result
+            document.getElementById('result').textContent = compoundInterest.toFixed(2);
+			document.getElementById('amount').textContent = amount.toFixed(2);
+        });
+    </script>
+</body>
+</html>
